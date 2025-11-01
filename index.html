@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zevar by Geeta - ARKS Monthly Report</title>
+    <title>Zevar by Geeta - Monthly Report</title>
     <style>
         * {
             margin: 0;
@@ -11,548 +11,643 @@
             box-sizing: border-box;
         }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #000;
-            padding: 20px;
-            color: #333;
+            color: #fff;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .ornamental-border {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #F7EDE5, transparent);
+            opacity: 0.3;
+        }
+
+        .ornamental-border.top {
+            top: 0;
+        }
+
+        .ornamental-border.bottom {
+            bottom: 0;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            padding: 60px 20px;
         }
 
         .header {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .header h1 {
-            color: #764ba2;
-            font-size: 32px;
-            margin-bottom: 10px;
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #F7EDE5, transparent);
         }
 
-        .header p {
-            color: #666;
-            font-size: 16px;
+        .brand-name {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            background: linear-gradient(135deg, #F7EDE5 0%, #fff 50%, #F7EDE5 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .report-subtitle {
+            color: #F7EDE5;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.8;
         }
 
         .section {
-            background: #F7EDE5;
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, rgba(247, 237, 229, 0.05) 0%, rgba(247, 237, 229, 0.02) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(247, 237, 229, 0.1);
+            border-radius: 24px;
+            padding: 50px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(247, 237, 229, 0.05), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .section:hover::before {
+            left: 100%;
         }
 
         .section-title {
-            font-size: 24px;
-            color: #764ba2;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
+            font-size: 28px;
+            color: #F7EDE5;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: #F7EDE5;
         }
 
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-            background-color: #F7EDE5;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
         }
 
         .metric-card {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            color: #000;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(247, 237, 229, 0.2);
+            padding: 35px 25px;
+            border-radius: 16px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #F7EDE5, transparent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(247, 237, 229, 0.4);
+            box-shadow: 0 20px 40px rgba(247, 237, 229, 0.1);
+        }
+
+        .metric-card:hover::before {
+            transform: scaleX(1);
         }
 
         .metric-label {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 8px;
+            font-size: 11px;
+            color: rgba(247, 237, 229, 0.7);
+            margin-bottom: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 2px;
         }
 
         .metric-value {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-size: 36px;
+            font-weight: 300;
+            color: #F7EDE5;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
         }
 
         .metric-subtext {
-            font-size: 12px;
-            opacity: 0.8;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.5px;
         }
 
         .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
             margin-top: 20px;
         }
 
         .comparison-card {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(247, 237, 229, 0.15);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
         }
 
-        .comparison-card.sale {
-            border-left-color: #10b981;
+        .comparison-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #F7EDE5, transparent);
+            transition: width 0.4s ease;
         }
 
-        .comparison-card.non-sale {
-            border-left-color: #f59e0b;
+        .comparison-card:hover::after {
+            width: 100%;
+            opacity: 0.05;
         }
 
         .comparison-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #333;
+            font-size: 20px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #F7EDE5;
+            letter-spacing: 1px;
         }
 
         .comparison-metrics {
             display: grid;
-            gap: 15px;
+            gap: 20px;
         }
 
         .comparison-metric {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(247, 237, 229, 0.1);
+        }
+
+        .comparison-metric:last-child {
+            border-bottom: none;
         }
 
         .comparison-metric-label {
-            color: #666;
-            font-size: 14px;
+            color: rgba(247, 237, 229, 0.7);
+            font-size: 13px;
+            letter-spacing: 1px;
         }
 
         .comparison-metric-value {
-            font-weight: 600;
-            font-size: 18px;
-            color: #333;
+            font-weight: 300;
+            font-size: 24px;
+            color: #F7EDE5;
         }
 
         .campaign-highlight {
-            background: #F7EDE5;
-            padding: 30px;
-            border-radius: 12px;
-            color: #000;
-            margin: 30px 0;
+            background: linear-gradient(135deg, rgba(247, 237, 229, 0.1) 0%, rgba(247, 237, 229, 0.05) 100%);
+            border: 1px solid rgba(247, 237, 229, 0.2);
+            padding: 50px;
+            border-radius: 24px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .campaign-highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(247, 237, 229, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
         }
 
         .campaign-highlight h3 {
-            font-size: 22px;
+            font-size: 24px;
             margin-bottom: 10px;
+            color: #F7EDE5;
+            font-weight: 300;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
         }
 
         .campaign-period {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 20px;
+            font-size: 13px;
+            color: rgba(247, 237, 229, 0.6);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
         }
 
         .campaign-metrics {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .campaign-metric {
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(247, 237, 229, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .campaign-metric:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: scale(1.05);
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
             margin-top: 20px;
         }
 
         .product-list {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(247, 237, 229, 0.15);
+            padding: 35px;
+            border-radius: 20px;
         }
 
         .product-list h4 {
             font-size: 18px;
-            margin-bottom: 20px;
-            color: #764ba2;
-            display: flex;
-            align-items: center;
-        }
-
-        .product-list h4::before {
-            margin-right: 10px;
-            font-size: 24px;
+            margin-bottom: 25px;
+            color: #F7EDE5;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(247, 237, 229, 0.1);
         }
 
         .product-item {
-            padding: 12px 15px;
-            background: white;
-            border-radius: 6px;
-            margin-bottom: 10px;
+            padding: 15px 20px;
+            background: rgba(247, 237, 229, 0.03);
+            border-radius: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(247, 237, 229, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover {
+            background: rgba(247, 237, 229, 0.08);
+            transform: translateX(10px);
         }
 
         .product-rank {
-            background: #667eea;
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-
-        .product-name {
-            color: #333;
-            font-size: 14px;
-        }
-
-        .creatives-section {
-            margin-top: 30px;
-        }
-
-        
-
-        .creative-box {
-            background: #f0f0f0;
-            padding: 80px 20px;
-            border-radius: 10px;
-            text-align: center;
-            color: #999;
-            border: 2px dashed #ddd;
-            font-size: 14px;
-        }
-
-        .footer {
-            text-align: center;
-            color: white;
-            margin-top: 30px;
-            padding: 20px;
-            font-size: 14px;
-        }
-
-        .insight-card {
-            display: flex;
-            align-items: flex-start;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            gap: 15px;
-            border-left: 4px solid #667eea;
-        }
-
-        .insight-icon {
-            font-size: 28px;
-            flex-shrink: 0;
-        }
-
-        .insight-content {
-            color: #333;
-            line-height: 1.6;
-            font-size: 15px;
-        }
-
-        .insight-content strong {
-            color: #764ba2;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .recommendations-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
-            border-radius: 12px;
-            color: white;
-            margin-top: 10px;
-        }
-
-        .recommendations-list {
-            display: grid;
-            gap: 15px;
-        }
-
-        .recommendation-item {
-            display: flex;
-            align-items: flex-start;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 18px;
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-            gap: 15px;
-        }
-
-        .rec-number {
-            background: white;
-            color: #764ba2;
+            background: linear-gradient(135deg, #F7EDE5 0%, rgba(247, 237, 229, 0.7) 100%);
+            color: #000;
             width: 32px;
             height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 16px;
+            font-weight: 500;
+            font-size: 14px;
+            margin-right: 20px;
             flex-shrink: 0;
         }
 
-        .rec-text {
+        .product-name {
+            color: #F7EDE5;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .insight-box {
+            background: rgba(247, 237, 229, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 3px solid #F7EDE5;
+        }
+
+        .insight-box strong {
+            color: #F7EDE5;
+            font-size: 13px;
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .insight-box p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
             line-height: 1.6;
-            font-size: 15px;
+            margin: 0;
         }
 
-        .key-findings-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
+        .creatives-section {
+            padding: 40px 0;
         }
 
-        .check-icon {
-            background: #10b981;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .creatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .creative-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(247, 237, 229, 0.15);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .creative-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #F7EDE5, transparent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .creative-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(247, 237, 229, 0.15);
+        }
+
+        .creative-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .creative-image {
+            min-height: 350px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            flex-shrink: 0;
+            margin-bottom: 25px;
         }
 
-        .key-findings-header h2 {
-            font-size: 28px;
-            color: #333;
-            margin: 0;
+        .creative-image img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 12px;
+            transition: transform 0.4s ease;
+        }
+
+        .creative-card:hover .creative-image img {
+            transform: scale(1.05);
+        }
+
+        .creative-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .creative-metric {
+            background: rgba(247, 237, 229, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(247, 237, 229, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .creative-metric:hover {
+            background: rgba(247, 237, 229, 0.1);
+        }
+
+        .creative-metric .value {
+            font-size: 18px;
+            font-weight: 300;
+            color: #F7EDE5;
+            margin-bottom: 5px;
+        }
+
+        .creative-metric .label {
+            font-size: 10px;
+            color: rgba(247, 237, 229, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .insights-section .section-title {
+            margin-bottom: 50px;
         }
 
         .findings-content {
             display: grid;
             gap: 20px;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .finding-item {
-            padding: 5px 0;
-            border-bottom: 1px solid #e5e7eb;
-            color: #333;
-            font-size: 16px;
-            line-height: 1.6;
+            padding: 20px 25px;
+            background: rgba(247, 237, 229, 0.03);
+            border-radius: 12px;
+            border-left: 3px solid #F7EDE5;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 15px;
+            line-height: 1.7;
+            transition: all 0.3s ease;
         }
 
-        .finding-item:last-child {
-            border-bottom: none;
-        }
-
-        .finding-item strong {
-            color: #1f2937;
-            font-weight: 600;
-        }
-
-        .next-steps-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .arrow-icon {
-            background: #667eea;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .next-steps-header h2 {
-            font-size: 28px;
-            color: #333;
-            margin: 0;
+        .finding-item:hover {
+            background: rgba(247, 237, 229, 0.08);
+            transform: translateX(10px);
         }
 
         .next-steps-content {
             display: grid;
-            gap: 20px;
+            gap: 25px;
         }
 
         .step-card {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            background: #f9fafb;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(247, 237, 229, 0.15);
+            padding: 30px;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .step-icon {
-            font-size: 32px;
-            flex-shrink: 0;
-            line-height: 1;
+        .step-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #F7EDE5, transparent);
+            transform: scaleY(0);
+            transition: transform 0.4s ease;
         }
 
-        .step-content p {
-            color: #333;
+        .step-card:hover {
+            background: rgba(247, 237, 229, 0.05);
+            transform: translateX(10px);
+        }
+
+        .step-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .step-card p {
+            color: rgba(255, 255, 255, 0.85);
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.7;
             margin: 0;
         }
 
+        .footer {
+            text-align: center;
+            color: rgba(247, 237, 229, 0.4);
+            margin-top: 80px;
+            padding: 40px 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(247, 237, 229, 0.1);
+        }
+
         @media (max-width: 768px) {
-            .metrics-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 40px 15px;
             }
-            
-            .comparison-grid {
-                grid-template-columns: 1fr;
+
+            .brand-name {
+                font-size: 32px;
+                letter-spacing: 4px;
             }
-            
+
+            .section {
+                padding: 30px 20px;
+            }
+
+            .comparison-grid,
             .products-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .creatives-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
             }
         }
-
-        /* Section Container */
-.creatives-section {
-  padding: 60px 5%;
-  background-color: #F7EDE5;
-}
-
-.section-title {
-  color: #000;
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-/* Grid Layout */
-.creatives-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-}
-
-/* Card */
-.creative-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 25px;
-}
-
-.creative-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-}
-
-/* Image */
-.creative-image img {
-  width: 100%;
-  max-width: 180px;
-  min-height: 250px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  object-fit: contain;
-}
-
-.creative-image {
-    min-height: 350px;
-}
-
-/* Metrics Container */
-.creative-metrics {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  width: 100%;
-}
-
-/* Individual Metric */
-.creative-metric {
-  background: #f8f9fa;
-  border-radius: 10px;
-  padding: 12px 10px;
-  text-align: center;
-  transition: background 0.2s ease;
-}
-
-.creative-metric:hover {
-  background: #f3f4f6;
-}
-
-.creative-metric .value {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #1f2937;
-}
-
-.creative-metric .label {
-  font-size: 0.8rem;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-top: 3px;
-}
-
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="./image (15).png" alt="">
-            <h1>Zevar by Geeta Monthly Report</h1>
-            <p>ZBG - Performance Overview & Campaign Analytics</p>
+            <h1 class="brand-name">ZEVAR BY GEETA</h1>
+            <p class="report-subtitle">Monthly Performance Report</p>
         </div>
 
-        <!-- Monthly Overview Section -->
         <div class="section">
-            <h2 class="section-title">Monthly Report Overview</h2>
+            <div class="ornamental-border top"></div>
+            <h2 class="section-title">Monthly Overview</h2>
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-label">Amount Spent</div>
@@ -580,13 +675,13 @@
                     <div class="metric-subtext">Average Order Value</div>
                 </div>
             </div>
+            <div class="ornamental-border bottom"></div>
         </div>
 
-        <!-- Period Comparison Section -->
         <div class="section">
             <h2 class="section-title">Period Comparison</h2>
             <div class="comparison-grid">
-                <div class="comparison-card sale">
+                <div class="comparison-card">
                     <div class="comparison-title">Sale Period Overview</div>
                     <div class="comparison-metrics">
                         <div class="comparison-metric">
@@ -608,7 +703,7 @@
                     </div>
                 </div>
 
-                <div class="comparison-card non-sale">
+                <div class="comparison-card">
                     <div class="comparison-title">Non-Sale Period Overview</div>
                     <div class="comparison-metrics">
                         <div class="comparison-metric">
@@ -632,7 +727,6 @@
             </div>
         </div>
 
-        <!-- US Campaign Highlight -->
         <div class="campaign-highlight">
             <h3>US Market Campaign</h3>
             <div class="campaign-period">September 26 - October 7, 2024</div>
@@ -656,7 +750,6 @@
             </div>
         </div>
 
-        <!-- Top Products Section -->
         <div class="section">
             <h2 class="section-title">Top Performing Products</h2>
             <div class="products-grid">
@@ -678,14 +771,9 @@
                         <div class="product-rank">4</div>
                         <div class="product-name">Aavira Kundan Necklace Set</div>
                     </div>
-                    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #667eea;">
-                        <div style="display: flex; align-items: flex-start;">
-                            <span style="font-size: 20px; margin-right: 10px;">💬</span>
-                            <div>
-                                <strong style="color: #667eea; font-size: 14px; display: block; margin-bottom: 5px;">Insight:</strong>
-                                <p style="color: #555; font-size: 13px; line-height: 1.5; margin: 0;">Moissanite and Kundan-based traditional jewellery show cross-border appeal, performing especially well in festive-themed creatives.</p>
-                            </div>
-                        </div>
+                    <div class="insight-box">
+                        <strong>Insight</strong>
+                        <p>Moissanite and Kundan-based traditional jewellery show cross-border appeal, performing especially well in festive-themed creatives.</p>
                     </div>
                 </div>
 
@@ -715,12 +803,138 @@
                         <div class="product-rank">6</div>
                         <div class="product-name">Nayira Kundan Necklace Set</div>
                     </div>
-                    <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #10b981;">
-                        <div style="display: flex; align-items: flex-start;">
-                            <span style="font-size: 20px; margin-right: 10px;">💬</span>
-                            <div>
-                                <strong style="color: #10b981; font-size: 14px; display: block; margin-bottom: 5px;">Insight:</strong>
-                                <p style="color: #555; font-size: 13px; line-height: 1.5; margin: 0;">Bridal and festive collections continue to dominate sales in India. The Zal Kundan Choker remains a top performer across both markets.</p>
+                    <div class="insight-box">
+                        <strong>Insight</strong>
+                        <p>Bridal and festive collections continue to dominate sales in India. The Zal Kundan Choker remains a top performer across both markets.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Top Performing Creatives</h2>
+            
+            <div class="creatives-section">
+                <h3 class="section-title">Sale Period</h3>
+                <div class="creatives-grid">
+                    <div class="creative-card">
+                        <div class="creative-image">
+                            <img src="./Sale1.png" alt="Sale Creative 1" />
+                        </div>
+                        <div class="creative-metrics">
+                            <div class="creative-metric">
+                                <div class="value">₹5,665</div>
+                                <div class="label">Spends</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">₹52,633</div>
+                                <div class="label">Revenue</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">2.26%</div>
+                                <div class="label">CTR</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">9.29</div>
+                                <div class="label">ROAS</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="creative-card">
+                        <div class="creative-image">
+                            <img src="./Sale2.png" alt="Sale Creative 1" />
+                        </div>
+                        <div class="creative-metrics">
+                            <div class="creative-metric">
+                                <div class="value">₹20,905</div>
+                                <div class="label">Spends</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">₹52,633</div>
+                                <div class="label">Revenue</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">11.34%</div>
+                                <div class="label">CTR</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">2.52</div>
+                                <div class="label">ROAS</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="creative-card">
+                        <div class="creative-image">
+                            <img src="./Sale3.png" alt="Sale Creative 1" />
+                        </div>
+                        <div class="creative-metrics">
+                            <div class="creative-metric">
+                                <div class="value">₹83,536</div>
+                                <div class="label">Spends</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">₹121,849</div>
+                                <div class="label">Revenue</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">5.55%</div>
+                                <div class="label">CTR</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">1.49</div>
+                                <div class="label">ROAS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="creatives-section">
+                <h3 class="section-title">Non-Sale Period</h3>
+                <div class="creatives-grid">
+                    <div class="creative-card">
+                        <div class="creative-image">
+                            <img src="./Non-sale1.png" alt="Non-Sale Creative 1" />
+                        </div>
+                        <div class="creative-metrics">
+                            <div class="creative-metric">
+                                <div class="value">₹36,296</div>
+                                <div class="label">Spends</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">₹84,660</div>
+                                <div class="label">Revenue</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">7.57%</div>
+                                <div class="label">CTR</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">2.33</div>
+                                <div class="label">ROAS</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="creative-card">
+                        <div class="creative-image">
+                            <img src="./Non-sale2.png" alt="Non-Sale Creative 2" />
+                        </div>
+                        <div class="creative-metrics">
+                            <div class="creative-metric">
+                                <div class="value">₹863</div>
+                                <div class="label">Spends</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">₹9,888</div>
+                                <div class="label">Revenue</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">8.40%</div>
+                                <div class="label">CTR</div>
+                            </div>
+                            <div class="creative-metric">
+                                <div class="value">11.45</div>
+                                <div class="label">ROAS</div>
                             </div>
                         </div>
                     </div>
@@ -728,202 +942,38 @@
             </div>
         </div>
 
-        <!-- Top Creatives Section -->
-        <div class="section">
-            <h2 class="section-title">Top Performing Creatives</h2>
-            
-            <section class="creatives-section">
-            <h3 class="section-title">Sale Period</h3>
-
-                <div class="creatives-grid">
-                    <div class="creative-card">
-                    <div class="creative-image">
-                        <img src="./Sale1.png" alt="Creative 1" />
-                    </div>
-
-                    <div class="creative-metrics">
-                        <div class="creative-metric">
-                        <div class="value">₹5,665</div>
-                        <div class="label">Spends</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">₹52,633</div>
-                        <div class="label">Revenue</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">2.26%</div>
-                        <div class="label">CTR</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">9.29</div>
-                        <div class="label">ROAS</div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="creative-card">
-                    <div class="creative-image">
-                        <img src="./Sale2.png" alt="Creative 1" />
-                    </div>
-
-                    <div class="creative-metrics">
-                        <div class="creative-metric">
-                        <div class="value">₹20,905</div>
-                        <div class="label">Spends</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">₹52,633</div>
-                        <div class="label">Revenue</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">11.34%</div>
-                        <div class="label">CTR</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">2.52</div>
-                        <div class="label">ROAS</div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="creative-card">
-                    <div class="creative-image">
-                        <img src="./Sale3.png" alt="Creative 1" />
-                    </div>
-
-                    <div class="creative-metrics">
-                        <div class="creative-metric">
-                        <div class="value">₹83,536</div>
-                        <div class="label">Spends</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">₹121,849</div>
-                        <div class="label">Revenue</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">5.55%</div>
-                        <div class="label">CTR</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">1.49</div>
-                        <div class="label">ROAS</div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                
-            </section>
-
-            <section class="creatives-section">
-            <h3 class="section-title" >Non-Sale Period</h3>
-
-                <div class="creatives-grid">
-                    <div class="creative-card">
-                    <div class="creative-image">
-                        <img src="./Non-sale1.png" alt="Creative 1" />
-                    </div>
-
-                    <div class="creative-metrics">
-                        <div class="creative-metric">
-                        <div class="value">₹36,296</div>
-                        <div class="label">Spends</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">₹84,660</div>
-                        <div class="label">Revenue</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">7.57%</div>
-                        <div class="label">CTR</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">2.33</div>
-                        <div class="label">ROAS</div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="creative-card">
-                    <div class="creative-image">
-                        <img src="./Non-sale2.png" alt="Creative 1" />
-                    </div>
-
-                    <div class="creative-metrics">
-                        <div class="creative-metric">
-                        <div class="value">₹863</div>
-                        <div class="label">Spends</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">₹9,888</div>
-                        <div class="label">Revenue</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">8.40</div>
-                        <div class="label">CTR</div>
-                        </div>
-                        <div class="creative-metric">
-                        <div class="value">11.45</div>
-                        <div class="label">ROAS</div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                
-            </section>
-        </div>
-
-
-        <!-- Key Insights & Recommendations Section -->
-        <div class="section">
-            <div class="key-findings-header">
-                <div class="check-icon">✓</div>
-                <h2>Key Insights & Recommendations</h2>
-            </div>
+        <div class="section insights-section">
+            <h2 class="section-title">Key Insights & Recommendations</h2>
             
             <div class="findings-content">
                 <div class="finding-item">
-                    ☑️ Sale periods continue to drive the majority of conversions and achieve higher ROAS.
+                    Sale periods continue to drive the majority of conversions and achieve higher ROAS.
                 </div>
-
                 <div class="finding-item">
-                    ☑️ US targeting shows strong potential, early data highlights high-value orders and good engagement.
+                    US targeting shows strong potential, early data highlights high-value orders and good engagement.
                 </div>
-
                 <div class="finding-item">
-                    ☑️ Top products such as Zal Kundan Choker and Nivisha Bridal Set should be prioritized in future campaigns for consistent revenue contribution.
+                    Top products such as Zal Kundan Choker and Nivisha Bridal Set should be prioritized in future campaigns for consistent revenue contribution.
                 </div>
-
                 <div class="finding-item">
-                    ☑️ Creative direction: Catalog-style creatives and videos perform best, delivering stronger engagement and higher conversion rates.
+                    Creative direction: Catalog-style creatives and videos perform best, delivering stronger engagement and higher conversion rates.
                 </div>
-
                 <div class="finding-item">
-                    ☑️ Operational update: Shiprocket integration has been successfully implemented, resulting in a smoother checkout process. Users now experience auto-filled address fields, reducing drop-offs and improving purchase completion rates.
+                    Operational update: Shiprocket integration has been successfully implemented, resulting in a smoother checkout process. Users now experience auto-filled address fields, reducing drop-offs and improving purchase completion rates.
                 </div>
             </div>
 
-            <div class="next-steps-header">
-                <div class="arrow-icon">→</div>
-                <h2>Next Steps</h2>
-            </div>
-
+            <h2 class="section-title">Next Steps</h2>
+            
             <div class="next-steps-content">
                 <div class="step-card">
-                    <div class="step-icon">🚀</div>
-                    <div class="step-content">
-                        <p>Gradually scale India targeting to ₹10,000/day to strengthen local market momentum.</p>
-                    </div>
+                    <p>Gradually scale India targeting to ₹10,000/day to strengthen local market momentum.</p>
                 </div>
-
                 <div class="step-card">
-                    <div class="step-icon">🌍</div>
-                    <div class="step-content">
-                        <p>Expand testing into new regions, starting with the UK, to diversify global audience reach.</p>
-                    </div>
+                    <p>Expand testing into new regions, starting with the UK, to diversify global audience reach.</p>
                 </div>
-
                 <div class="step-card">
-                    <div class="step-icon">🎯</div>
-                    <div class="step-content">
-                        <p>Experiment with new audiences and creatives to continuously refine performance and optimize return on ad spend.</p>
-                    </div>
+                    <p>Experiment with new audiences and creatives to continuously refine performance and optimize return on ad spend.</p>
                 </div>
             </div>
         </div>
@@ -934,4 +984,3 @@
     </div>
 </body>
 </html>
-
