@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zevar by Geeta - Monthly Performance Report</title>
+    
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           CSS VARIABLES - DESIGN SYSTEM
+           ============================================ */
+        :root {
+            /* Colors - Black & Gold Palette */
+            --color-black: #000000;
+            --color-gold: #D4AF37;
+            --color-gold-light: #E8C87C;
+            --color-cream: #F7EDE5;
+            --color-white: #FFFFFF;
+            --color-white-soft: rgba(255, 255, 255, 0.9);
+            --color-overlay: rgba(0, 0, 0, 0.6);
+            
+            /* Translucent panels */
+            --glass-bg: rgba(247, 237, 229, 0.08);
+            --glass-border: rgba(212, 175, 55, 0.2);
+            --glass-glow: rgba(212, 175, 55, 0.15);
+            
+            /* Typography */
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            
+            /* Sizing */
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+            --container-max: 1400px;
+            
+            /* Effects */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
+            --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-black);
+            color: var(--color-white-soft);
+            line-height: 1.6;
+            font-size: 16px;
+            font-weight: 300;
+            padding: var(--space-lg) var(--space-md);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Organic background shapes */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%;
+            right: -10%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, var(--glass-glow) 0%, transparent 70%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            pointer-events: none;
+            z-index: 0;
+            animation: morphShape 20s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -15%;
+            left: -15%;
+            width: 50%;
+            height: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+            border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%;
+            pointer-events: none;
+            z-index: 0;
+            animation: morphShape 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes morphShape {
+            0%, 100% { 
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                transform: rotate(0deg) scale(1);
+            }
+            50% { 
+                border-radius: 30% 70% 60% 40% / 50% 60% 40% 50%;
+                transform: rotate(10deg) scale(1.1);
+            }
+        }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+        h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+
+        /* ============================================
+           HEADER SECTION
+           ============================================ */
+        .header {
+            text-align: center;
+            padding: var(--space-2xl) var(--space-lg);
+            background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(0, 0, 0, 0.4) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--space-xl);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .header-logo {
+            max-width: 200px;
+            margin-bottom: var(--space-md);
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+        }
+
+        .header h1 {
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .header-subtitle {
+            color: var(--color-cream);
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        /* ============================================
+           SECTION CONTAINERS
+           ============================================ */
+        section {
+            margin-bottom: var(--space-xl);
+            padding: var(--space-xl) var(--space-lg);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--border-radius);
+            padding: 1px;
+            background: linear-gradient(135deg, var(--glass-border), transparent, var(--glass-border));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            color: var(--color-gold);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--glass-border);
+            letter-spacing: 0.05em;
+        }
+
+        /* ============================================
+           METRICS GRID - Monthly Overview
+           ============================================ */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%);
+            padding: var(--space-lg);
+            border-radius: var(--border-radius-sm);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-gold);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .metric-card:hover::before {
+            opacity: 1;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--color-cream);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            color: var(--color-gold-light);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            text-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+        }
+
+        .metric-subtext {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 300;
+        }
+
+        /* ============================================
+           COMPARISON GRID - Sale vs Non-Sale
+           ============================================ */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .comparison-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+            padding: var(--space-lg);
+            border-radius: var(--border-radius-sm);
+            border-left: 3px solid var(--color-gold);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .comparison-card.sale {
+            border-left-color: #4ade80;
+        }
+
+        .comparison-card.non-sale {
+            border-left-color: #fb923c;
+        }
+
+        .comparison-card:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .comparison-title {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            color: var(--color-gold-light);
+            margin-bottom: var(--space-md);
+            font-weight: 600;
+        }
+
+        .comparison-metrics {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .comparison-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-metric:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-metric-label {
+            color: var(--color-cream);
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        .comparison-metric-value {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            color: var(--color-white);
+            font-weight: 700;
+        }
+
+        /* ============================================
+           CAMPAIGN HIGHLIGHT
+           ============================================ */
+        .campaign-highlight {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(0, 0, 0, 0.8) 100%);
+            padding: var(--space-xl);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-gold);
+            margin: var(--space-xl) 0;
+            box-shadow: inset 0 1px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .campaign-highlight h3 {
+            color: var(--color-gold-light);
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .campaign-period {
+            color: var(--color-cream);
+            font-size: 0.95rem;
+            margin-bottom: var(--space-lg);
+            font-weight: 300;
+        }
+
+        .campaign-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .campaign-metric {
+            background: rgba(0, 0, 0, 0.5);
+            padding: var(--space-md);
+            border-radius: var(--border-radius-sm);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        /* ============================================
+           PRODUCTS SECTION
+           ============================================ */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .product-list {
+            background: rgba(0, 0, 0, 0.6);
+            padding: var(--space-lg);
+            border-radius: var(--border-radius-sm);
+            border: 1px solid var(--glass-border);
+        }
+
+        .product-list h4 {
+            color: var(--color-gold-light);
+            margin-bottom: var(--space-md);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 1.1rem;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(247, 237, 229, 0.05);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: var(--space-sm);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .product-item:hover {
+            background: rgba(247, 237, 229, 0.1);
+            border-color: var(--color-gold);
+            transform: translateX(4px);
+        }
+
+        .product-rank {
+            background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
+            color: var(--color-black);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-right: var(--space-md);
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.5);
+        }
+
+        .product-name {
+            color: var(--color-white-soft);
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        .product-insight {
+            background: rgba(212, 175, 55, 0.08);
+            padding: var(--space-md);
+            border-radius: var(--border-radius-sm);
+            margin-top: var(--space-md);
+            border-left: 3px solid var(--color-gold);
+        }
+
+        .insight-label {
+            color: var(--color-gold);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: var(--space-xs);
+        }
+
+        .insight-text {
+            color: var(--color-cream);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           CREATIVES SECTION
+           ============================================ */
+        .creatives-subsection {
+            margin-bottom: var(--space-xl);
+        }
+
+        .subsection-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-cream);
+            margin-bottom: var(--space-lg);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .creatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .creative-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-sm);
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .creative-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.1), transparent 70%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .creative-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-gold);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .creative-card:hover::before {
+            opacity: 1;
+        }
+
+        .creative-image {
+            width: 100%;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+            position: relative;
+            z-index: 1;
+        }
+
+        .creative-image img {
+            max-width: 180px;
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-sm);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+        }
+
+        .creative-card:hover .creative-image img {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .creative-metrics {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        .creative-metric {
+            background: rgba(247, 237, 229, 0.08);
+            border-radius: var(--border-radius-sm);
+            padding: var(--space-md) var(--space-sm);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .creative-metric:hover {
+            background: rgba(247, 237, 229, 0.12);
+            border-color: var(--color-gold);
+        }
+
+        .creative-metric .value {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--color-gold-light);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .creative-metric .label {
+            font-size: 0.75rem;
+            color: var(--color-cream);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        /* ============================================
+           KEY INSIGHTS & RECOMMENDATIONS
+           ============================================ */
+        .insights-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .insights-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--color-black);
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
+        }
+
+        .insights-header h2 {
+            margin: 0;
+            color: var(--color-gold-light);
+        }
+
+        .findings-list {
+            list-style: none;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .finding-item {
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-cream);
+            font-size: 1rem;
+            line-height: 1.7;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .finding-item::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.6em;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+        }
+
+        .finding-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Next Steps */
+        .next-steps-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .steps-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--color-black);
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-gold);
+        }
+
+        .next-steps-header h2 {
+            margin: 0;
+            color: var(--color-gold-light);
+        }
+
+        .steps-list {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .step-card {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            background: rgba(247, 237, 229, 0.05);
+            padding: var(--space-lg);
+            border-radius: var(--border-radius-sm);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .step-card:hover {
+            background: rgba(247, 237, 229, 0.1);
+            border-color: var(--color-gold);
+            transform: translateX(4px);
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .step-content {
+            color: var(--color-cream);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            text-align: center;
+            padding: var(--space-xl) var(--space-md);
+            color: var(--color-cream);
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin-top: var(--space-2xl);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* ============================================
+           RESPONSIVE ADJUSTMENTS
+           ============================================ */
+        @media (max-width: 768px) {
+            body {
+                padding: var(--space-md) var(--space-sm);
+            }
+
+            .metrics-grid,
+            .comparison-grid,
+            .products-grid,
+            .creatives-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .campaign-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .insights-header,
+            .next-steps-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            section {
+                padding: var(--space-lg) var(--space-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .creative-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .campaign-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- ============================================
+             HEADER SECTION
+             Logo + Title + Subtitle
+             ============================================ -->
+        <header class="header">
+            <img src="./image (15).png" alt="Zevar by Geeta Logo" class="header-logo">
+            <h1>Zevar by Geeta Monthly Report</h1>
+            <p class="header-subtitle">ZBG - Performance Overview &amp; Campaign Analytics</p>
+        </header>
+
+        <!-- ============================================
+             MONTHLY OVERVIEW SECTION
+             Amount Spent, Orders, Revenue, ROAS, AOV
+             ============================================ -->
+        <section>
+            <h2 class="section-title">Monthly Report Overview</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Amount Spent</div>
+                    <div class="metric-value">₹2,04,539</div>
+                    <div class="metric-subtext">Total ad spend</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Orders</div>
+                    <div class="metric-value">46</div>
+                    <div class="metric-subtext">Total orders received</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Revenue</div>
+                    <div class="metric-value">₹4,90,577</div>
+                    <div class="metric-subtext">Total revenue generated</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">ROAS</div>
+                    <div class="metric-value">2.40x</div>
+                    <div class="metric-subtext">Return on ad spend</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">AOV</div>
+                    <div class="metric-value">₹10,664</div>
+                    <div class="metric-subtext">Average Order Value</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             PERIOD COMPARISON SECTION
+             Sale vs Non-Sale Performance
+             ============================================ -->
+        <section>
+            <h2 class="section-title">Period Comparison</h2>
+            <div class="comparison-grid">
+                <div class="comparison-card sale">
+                    <div class="comparison-title">Sale Period Overview</div>
+                    <div class="comparison-metrics">
+                        <div class="comparison-metric">
+                            <span class="comparison-metric-label">Amount Spent</span>
+                            <span class="comparison-metric-value">₹1,46,164</span>
+                        </div>
+                        <div class="comparison-metric">
+                            <span class="comparison-metric-label">Orders</span>
+                            <span class="comparison-metric-value">41</span>
+                        </div>
+                        <div class="comparison-metric">
+                            <span class="comparison-metric-label">Revenue</span>
+                            <span class="comparison-metric-value">₹4,02,415</span>
+                        </div>
+                        <div class="comparison-metric">
+                            <span class="comparison-metric-label">ROAS</span>
+                            <span class="comparison-metric-value">2.75x</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card non-sale">
+                    <div class="comparison-title">Non-Sale Period Overview</div>
+                    <div class="comparison-metrics">
+                        <div class="comparison-metric">
+                            <span class="comparison-metric-label">Amount Spent</span>
+                            <span class="comparison-metric-value">₹58,375</span>
+                        </div>
+                        <div class="comparison-metric">
+                            <span class="comparison-metric-label">Orders</span>
+                            <span class="comparison-metric-value">5</span>
+                        </div>
+                        <div class="comparison-metric">
+                            <span class="comparison-metric-label">Revenue</span>
+                            <span class="comparison-metric-value">₹88,162</span>
+                        </div>
+                        <div class="comparison-metric">
+                            <span class="comparison-metric-label">ROAS</span>
+                            <span class="comparison-metric-value">1.51x</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             CAMPAIGN HIGHLIGHT
+             US Market Campaign Details
+             ============================================ -->
+        <div class="campaign-highlight">
+            <h3>US Market Campaign</h3>
+            <div class="campaign-period">September 26 - October 7, 2024</div>
+            <div class="campaign-metrics">
+                <div class="campaign-metric">
+                    <div class="metric-label">Amount Spent</div>
+                    <div class="metric-value">₹68,702</div>
+                </div>
+                <div class="campaign-metric">
+                    <div class="metric-label">Revenue</div>
+                    <div class="metric-value">₹1,39,044</div>
+                </div>
+                <div class="campaign-metric">
+                    <div class="metric-label">Orders</div>
+                    <div class="metric-value">9</div>
+                </div>
+                <div class="campaign-metric">
+                    <div class="metric-label">ROAS</div>
+                    <div class="metric-value">2.02x</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             TOP PRODUCTS SECTION
+             Ranked Lists for US and India Markets
+             ============================================ -->
+        <section>
+            <h2 class="section-title">Top Performing Products</h2>
+            <div class="products-grid">
+                
+                <!-- US Market Products -->
+                <div class="product-list">
+                    <h4>United States Market</h4>
+                    <div class="product-item">
+                        <div class="product-rank">1</div>
+                        <div class="product-name">Aarna Red Moissanite Necklace Set</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-rank">2</div>
+                        <div class="product-name">Zal Kundan Choker</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-rank">3</div>
+                        <div class="product-name">Kesh Polki Necklace Set</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-rank">4</div>
+                        <div class="product-name">Aavira Kundan Necklace Set</div>
+                    </div>
+                    
+                    <div class="product-insight">
+                        <span class="insight-label">Insight</span>
+                        <p class="insight-text">Moissanite and Kundan-based traditional jewellery show cross-border appeal, performing especially well in festive-themed creatives.</p>
+                    </div>
+                </div>
+
+                <!-- India Market Products -->
+                <div class="product-list">
+                    <h4>India Market</h4>
+                    <div class="product-item">
+                        <div class="product-rank">1</div>
+                        <div class="product-name">Nivisha Moissanite Bridal Set</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-rank">2</div>
+                        <div class="product-name">Harini Kundan Choker</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-rank">3</div>
+                        <div class="product-name">Amara Kundan Chandbalis</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-rank">4</div>
+                        <div class="product-name">Diana Emerald Diamond Bridal Set</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-rank">5</div>
+                        <div class="product-name">Zal Kundan Choker</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-rank">6</div>
+                        <div class="product-name">Nayira Kundan Necklace Set</div>
+                    </div>
+                    
+                    <div class="product-insight">
+                        <span class="insight-label">Insight</span>
+                        <p class="insight-text">Bridal and festive collections continue to dominate sales in India. The Zal Kundan Choker remains a top performer across both markets.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             TOP CREATIVES SECTION
+             Sale Period and Non-Sale Period Grids
+             ============================================ -->
+        <section>
+            <h2 class="section-title">Top Performing Creatives</h2>
+            
+            <!-- Sale Period Creatives -->
+            <div class="creatives-subsection">
+                <h3 class="subsection-title">Sale Period</h3>
+                <div class="creatives-grid">
+                    <div class="creative-card">
+                        <div class="creative-image">
+                            <img src="./Sale1.png" alt="Sale Creative 1">
+                        </div>
+                        <div class="creative-metrics">
+                            <div class="creative-metric">
+                                <span class="value">₹5,665</span>
+                                <span class="label">Spends</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">₹52,633</span>
+                                <span class="label">Revenue</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">2.26%</span>
+                                <span class="label">CTR</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">9.29</span>
+                                <span class="label">ROAS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="creative-card">
+                        <div class="creative-image">
+                            <img src="./Sale2.png" alt="Sale Creative 2">
+                        </div>
+                        <div class="creative-metrics">
+                            <div class="creative-metric">
+                                <span class="value">₹20,905</span>
+                                <span class="label">Spends</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">₹52,633</span>
+                                <span class="label">Revenue</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">11.34%</span>
+                                <span class="label">CTR</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">2.52</span>
+                                <span class="label">ROAS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="creative-card">
+                        <div class="creative-image">
+                            <img src="./Sale3.png" alt="Sale Creative 3">
+                        </div>
+                        <div class="creative-metrics">
+                            <div class="creative-metric">
+                                <span class="value">₹83,536</span>
+                                <span class="label">Spends</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">₹1,21,849</span>
+                                <span class="label">Revenue</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">5.55%</span>
+                                <span class="label">CTR</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">1.49</span>
+                                <span class="label">ROAS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Non-Sale Period Creatives -->
+            <div class="creatives-subsection">
+                <h3 class="subsection-title">Non-Sale Period</h3>
+                <div class="creatives-grid">
+                    <div class="creative-card">
+                        <div class="creative-image">
+                            <img src="./Non-sale1.png" alt="Non-Sale Creative 1">
+                        </div>
+                        <div class="creative-metrics">
+                            <div class="creative-metric">
+                                <span class="value">₹36,296</span>
+                                <span class="label">Spends</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">₹84,660</span>
+                                <span class="label">Revenue</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">7.57%</span>
+                                <span class="label">CTR</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">2.33</span>
+                                <span class="label">ROAS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="creative-card">
+                        <div class="creative-image">
+                            <img src="./Non-sale2.png" alt="Non-Sale Creative 2">
+                        </div>
+                        <div class="creative-metrics">
+                            <div class="creative-metric">
+                                <span class="value">₹863</span>
+                                <span class="label">Spends</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">₹9,888</span>
+                                <span class="label">Revenue</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">8.40%</span>
+                                <span class="label">CTR</span>
+                            </div>
+                            <div class="creative-metric">
+                                <span class="value">11.45</span>
+                                <span class="label">ROAS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             KEY INSIGHTS & RECOMMENDATIONS SECTION
+             Findings List + Action Items
+             ============================================ -->
+        <section>
+            <div class="insights-header">
+                <div class="insights-icon">✓</div>
+                <h2>Key Insights &amp; Recommendations</h2>
+            </div>
+            
+            <ul class="findings-list">
+                <li class="finding-item">
+                    Sale periods continue to drive the majority of conversions and achieve higher ROAS.
+                </li>
+                <li class="finding-item">
+                    US targeting shows strong potential, early data highlights high-value orders and good engagement.
+                </li>
+                <li class="finding-item">
+                    Top products such as Zal Kundan Choker and Nivisha Bridal Set should be prioritized in future campaigns for consistent revenue contribution.
+                </li>
+                <li class="finding-item">
+                    Creative direction: Catalog-style creatives and videos perform best, delivering stronger engagement and higher conversion rates.
+                </li>
+                <li class="finding-item">
+                    Operational update: Shiprocket integration has been successfully implemented, resulting in a smoother checkout process. Users now experience auto-filled address fields, reducing drop-offs and improving purchase completion rates.
+                </li>
+            </ul>
+
+            <div class="next-steps-header">
+                <div class="steps-icon">→</div>
+                <h2>Next Steps</h2>
+            </div>
+
+            <div class="steps-list">
+                <div class="step-card">
+                    <div class="step-icon">↗</div>
+                    <div class="step-content">
+                        <p>Gradually scale India targeting to ₹10,000/day to strengthen local market momentum.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon">◉</div>
+                    <div class="step-content">
+                        <p>Expand testing into new regions, starting with the UK, to diversify global audience reach.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon">◈</div>
+                    <div class="step-content">
+                        <p>Experiment with new audiences and creatives to continuously refine performance and optimize return on ad spend.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             FOOTER
+             Copyright Notice
+             ============================================ -->
+        <footer>
+            <p>&copy; 2025 Zevar by Geeta - Monthly Performance Report by Black Coffee Media</p>
+        </footer>
+
+    </div>
+</body>
+</html>
